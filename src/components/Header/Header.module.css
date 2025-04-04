@@ -1,0 +1,74 @@
+.containerHeader {
+  margin-bottom: 20px;
+}
+
+.containerBtnLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.button {
+  background-color: #5b5b5b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-right: 20px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  height: 46px;
+  width: auto;
+}
+
+.button:hover {
+  background-color: #484848;
+  transform: scale(1.05);
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.link {
+  background-color: #5b5b5b;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer; 
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  text-decoration: none;
+  box-sizing: border-box;
+  height: 46px;
+  width: auto;
+  white-space: nowrap;
+}
+
+.link:hover {
+  background-color: #484848;
+  transform: scale(1.05);
+}
+
+.link:active {
+  transform: scale(0.95);
+}
+
+@media (min-width: 768px) {
+  .button {
+    height: 46px;
+    width: 170px;
+    padding: 10px 20px;
+  }
+  
+  .link {
+    height: 46px;
+    width: 170px;
+    padding: 10px 20px;
+  }
+}

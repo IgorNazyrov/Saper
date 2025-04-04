@@ -1,0 +1,44 @@
+.containerGame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  padding: 0.5rem 10px 0.5rem 10px;
+}
+
+.gameInfo {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer {
+  margin-right: 10px;
+}
+
+.cellsInfo {
+  margin-right: 10px;
+}
+
+.board {
+  display: grid;
+  background-color: #999;
+  border: 2px solid #333;
+  margin: 20px auto;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+@media (min-width: 768px) {
+  .containerGame {
+    padding: 4vh 5vw 4vh 5vw;
+  }
+
+  .board {
+    overflow-x: hidden;
+  }
+}

@@ -1,0 +1,48 @@
+.containerLeaderBoard { 
+  margin: 0 auto;
+  padding: 0.5rem 10px 0.5rem 10px;
+}
+
+@media (min-width: 468px) {
+  .containerLeaderBoard {
+    padding: 4vh 5vw 4vh 5vw;
+  }
+  .tableContainer {
+    justify-self: center;
+  }
+}
+
+.tableContainer {
+  margin-top: 20px;
+  overflow-x: auto;
+  display: flex;
+  align-self: center;
+}
+
+.leaderboardTable {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: auto;
+}
+
+.leaderBoardTable th, 
+.leaderBoardTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.leaderBoardTable th {
+  font-weight: bold;
+}
+
+.leaderBoardTable td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+.emptyMessage {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
