@@ -2,7 +2,7 @@
 
 Этот проект представляет собой приложение для игры в сапёра, которое использует React, React-Router-Dom.
 
-## Демо: [https://saper-72.netlify.app/](https://saper-72.netlify.app/) заходить с включённым vpn
+## Демо: [https://igornazyrov.github.io/Saper/](https://igornazyrov.github.io/Saper/)
 
 ![Скриншот дизайна](public/Дизайн%20Сапёра.png)
 
@@ -17,7 +17,7 @@
 
     ```bash
     npm install
-    ```
+    ``` 
 
 3.  Запустите приложение:
 
