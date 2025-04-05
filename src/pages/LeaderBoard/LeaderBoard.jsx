@@ -42,6 +42,7 @@ export default function LeaderBoard() {
               <th>Сложность</th>
               <th>Дата</th>
             </tr>
+            
           </thead>
           <tbody> 
             {leaderBoard.map((score, index) => (
@@ -57,10 +58,10 @@ export default function LeaderBoard() {
             ))}
           </tbody>
         </table>
-        {leaderBoard.length === 0 && (
+      </div>
+      {leaderBoard.length === 0 && (
           <p className={styles.emptyMessage}>Таблица рекордов пуста</p>
         )}
-      </div>
     </div>
   );
 }
