@@ -4,24 +4,19 @@ import styles from './LeaderBoard.module.css'
 
 export default function LeaderBoard() {
   const [leaderBoard, setLeaderBoard] = useState([]);
-  const initialTime = {
-    easy: 600,
-    medium: 2400,
-    hard: 6000,
-  }
+  // const initialTime = {
+  //   easy: 600,
+  //   medium: 2400,
+  //   hard: 6000,
+  // }
 
   useEffect(() => {
     try {
       const savedData = localStorage.getItem("leaderBoard");
       const parsedData = savedData ? JSON.parse(savedData) : [];
       
-      const transformedData = parsedData.map((score) => ({
-        ...score,
-        spentTime: initialTime[score.difficulty] - score.time
-      }))
-
-      const sortedData = [...transformedData]
-        .sort((a, b) => a.spentTime - b.spentTime)
+      const sortedData = [...parsedData]
+        .sort((a, b) => a.time - b.time)
         .slice(0, 10);
       setLeaderBoard(sortedData);
     } catch (error) {
@@ -48,7 +43,7 @@ export default function LeaderBoard() {
             {leaderBoard.map((score, index) => (
               <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{score.spentTime} сек</td>
+                <td>{score.time} сек</td>
                 <td>
                   {score.difficulty === 'easy' ? 'Легкая' :
                   score.difficulty === 'medium' ? 'Средняя' : 'Сложная'}

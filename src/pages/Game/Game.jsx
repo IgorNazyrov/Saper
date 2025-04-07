@@ -4,15 +4,15 @@ import Cell from "../../components/Cell/Cell"
 import { DifficultyContext } from "../../components/DifficultyContext"
 import styles from './Game.module.css'
 
-
 export default function Game () {  
   const { difficulty } = useContext(DifficultyContext)
   const [board, setBoard] = useState([])
-  const [cellsLeft, setCellsLeft] = useState(10)
+  // const [cellsLeft, setCellsLeft] = useState(10)
   const [time, setTime] = useState(0)
   const [timeIsRunning, setTimeIsRunning] = useState(false)
   const [firstClickMade, setFirstClickMade] = useState(false)
   const [gameOver, setGameOver] = useState(false)
+  const [minesLeft, setMinesLeft] = useState(10)
   const intervalRef = useRef(null)
   const [error, setError] = useState(null)
 
@@ -90,9 +90,10 @@ export default function Game () {
         }
       }
       setBoard(newBoard)
-      setCellsLeft(rows * cols - mines)
+      // setCellsLeft(rows * cols - mines)
       setTime(0)
       setGameOver(false)
+      setMinesLeft(mines)
     } catch (err) {
       handleError(err, 'инициализации доски')
       setBoard(Array(8).fill().map(() => 
@@ -104,7 +105,7 @@ export default function Game () {
           neighborMines: 0
         }))
       ));
-      setCellsLeft(64);
+      // setCellsLeft(64);
     }
   }, [])
 
@@ -129,16 +130,16 @@ export default function Game () {
         hard: 6000,
       }[difficulty]
   
-      setTime(initialTime)
+      setTime(0)
   
       intervalRef.current = setInterval(() => {
         setTime(prevTime => {
-          if (prevTime <= 1) {
+          if (prevTime === initialTime) {
             clearInterval(intervalRef.current)
             setGameOver(true)
             return 0
           }
-          return prevTime - 1
+          return prevTime + 1
         })
       }, 1000)
     } catch (err) {
@@ -163,11 +164,12 @@ export default function Game () {
       const leaderBoard = currentData ? JSON.parse(currentData) : []
 
       const newAttempt = {
-        time,
-        difficulty,
+        time: time,
+        difficulty: difficulty,
         date: new Date().toISOString()
       }
 
+      leaderBoard.push(newAttempt)
       localStorage.setItem('leaderBoard', JSON.stringify(leaderBoard, newAttempt))
     } catch (err) {
       handleError(err, 'сохранении результатов')
@@ -213,7 +215,7 @@ export default function Game () {
   
       const queue = [[i, j]]
       const revealedCells = []
-      
+
       while (queue.length > 0) {
         const [row, col] = queue.shift()
   
@@ -242,7 +244,7 @@ export default function Game () {
       }
   
       setBoard(newBoard)
-      setCellsLeft(prev => prev - revealedCells.length)
+      // setCellsLeft(prev => prev - revealedCells.length)
   
       const isWon = newBoard.flat().every(cell => cell.isRevealed || cell.isMine)
       if (isWon) {
@@ -267,9 +269,11 @@ export default function Game () {
   
       if(!cell.isFlagged && !cell.isNotExactly) {
         cell.isFlagged = true
+        setMinesLeft((prev) =>prev - 1)
       } else if (cell.isFlagged) {
         cell.isFlagged = false
         cell.isNotExactly = true
+        setMinesLeft((prev) => prev + 1)
       } else {
         cell.isNotExactly = false
       }
@@ -291,7 +295,8 @@ export default function Game () {
       )}
       <div className={styles.gameInfo}>
         <div className={styles.timer}>Таймер: {formatTime(time)}</div>
-        <div className={styles.cellsInfo}>Ячеек осталось: {cellsLeft}</div>
+        {/* <div className={styles.cellsInfo}>Ячеек осталось: {cellsLeft}</div> */}
+        <div className={styles.cellsInfo}>Мин осталось: {minesLeft}</div>
         <button className={styles.reset} onClick={resetGame}>↻</button>
       </div>
       <div className={styles.board} 
