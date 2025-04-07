@@ -115,7 +115,7 @@ export default function Game () {
     } catch (err) {
       handleError(err, 'эффекте инициализации')
     }
-  }, [difficulty])
+  }, [difficulty, initBoard])
   
   useEffect(() => {
     try {
