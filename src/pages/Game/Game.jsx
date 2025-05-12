@@ -7,12 +7,12 @@ import styles from './Game.module.css'
 export default function Game () {  
   const { difficulty } = useContext(DifficultyContext)
   const [board, setBoard] = useState([])
-  // const [cellsLeft, setCellsLeft] = useState(10)
+  const [cellsLeft, setCellsLeft] = useState(10)
   const [time, setTime] = useState(0)
   const [timeIsRunning, setTimeIsRunning] = useState(false)
   const [firstClickMade, setFirstClickMade] = useState(false)
   const [gameOver, setGameOver] = useState(false)
-  const [minesLeft, setMinesLeft] = useState(10)
+  // const [minesLeft, setMinesLeft] = useState(10)
   const intervalRef = useRef(null)
   const [error, setError] = useState(null)
 
@@ -90,10 +90,10 @@ export default function Game () {
         }
       }
       setBoard(newBoard)
-      // setCellsLeft(rows * cols - mines)
+      setCellsLeft(rows * cols - mines)
       setTime(0)
       setGameOver(false)
-      setMinesLeft(mines)
+      // setMinesLeft(mines)
     } catch (err) {
       handleError(err, 'инициализации доски')
       setBoard(Array(8).fill().map(() => 
@@ -105,7 +105,7 @@ export default function Game () {
           neighborMines: 0
         }))
       ));
-      // setCellsLeft(64);
+      setCellsLeft(64);
     }
   }, [])
 
@@ -244,7 +244,7 @@ export default function Game () {
       }
   
       setBoard(newBoard)
-      // setCellsLeft(prev => prev - revealedCells.length)
+      setCellsLeft(prev => prev - revealedCells.length)
   
       const isWon = newBoard.flat().every(cell => cell.isRevealed || cell.isMine)
       if (isWon) {
@@ -269,11 +269,11 @@ export default function Game () {
   
       if(!cell.isFlagged && !cell.isNotExactly) {
         cell.isFlagged = true
-        setMinesLeft((prev) =>prev - 1)
+        // setMinesLeft((prev) =>prev - 1)
       } else if (cell.isFlagged) {
         cell.isFlagged = false
         cell.isNotExactly = true
-        setMinesLeft((prev) => prev + 1)
+        // setMinesLeft((prev) => prev + 1)
       } else {
         cell.isNotExactly = false
       }
@@ -295,8 +295,8 @@ export default function Game () {
       )}
       <div className={styles.gameInfo}>
         <div className={styles.timer}>Таймер: {formatTime(time)}</div>
-        {/* <div className={styles.cellsInfo}>Ячеек осталось: {cellsLeft}</div> */}
-        <div className={styles.cellsInfo}>Мин осталось: {minesLeft}</div>
+        <div className={styles.cellsInfo}>Ячеек осталось: {cellsLeft}</div>
+        {/* <div className={styles.cellsInfo}>Мин осталось: {minesLeft}</div> */}
         <button className={styles.reset} onClick={resetGame}>↻</button>
       </div>
       <div className={styles.board} 
